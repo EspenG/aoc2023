@@ -1,12 +1,15 @@
 import Std.Data.RBMap.Basic
 
+namespace AOC
+namespace P3
+
 def has_symbol (s: String) : Bool :=
   s.any (fun c => !c.isDigit && c != '.')
 
-def p3a : IO Unit :=
+def p3a (filename : String) : IO Unit :=
 do
   let empty := "............"
-  let f ← IO.FS.readFile "P3/input.txt"
+  let f ← IO.FS.readFile filename
   let s := f.splitOn "\n" |>.dropLast |>.map (fun line => "." ++ line ++ ".")
   let s := empty :: s ++ [empty]
   let mut total := 0
@@ -59,12 +62,12 @@ def StarLocations := Std.RBMap (Nat × Nat) Nat compare
 def create_star_location (x: Nat) (y: Nat) : (Nat × Nat) :=
   (x,y)
 
-def p3b : IO Unit :=
+def p3b (filename : String) : IO Unit :=
 do
 
 
   let empty := "............"
-  let f ← IO.FS.readFile "P3/input.txt"
+  let f ← IO.FS.readFile filename
   let s := f.splitOn "\n" |>.dropLast |>.map (fun line => "." ++ line ++ ".")
   let s := empty :: s ++ [empty]
   let mut total := 0
@@ -117,3 +120,6 @@ do
       x := digit.stopPos.byteIdx + 1
 
   IO.print s!"{total}\n"
+
+end P3
+end AOC

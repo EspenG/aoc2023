@@ -1,14 +1,18 @@
 import Lean.Data.Trie
 
+namespace AOC
+
+namespace P1
+
 def reverse (s : String) : String :=
   ⟨s.data.reverse⟩
 
 def takeFirstNumber (s : String) : String :=
   s.dropWhile Char.isAlpha |>.takeWhile Char.isDigit |>.front |>.toString
 
-def p1a : IO Unit :=
+def p1a (filename : String) : IO Unit :=
 do
-  let f ← IO.FS.readFile "P1/input.txt"
+  let f ← IO.FS.readFile filename
   let s := f.splitOn "\n"
 
   let total := s.foldl (fun x y =>
@@ -76,9 +80,9 @@ def find_first_num_back (s : String) (numberTrie : NumberTrie) : Option String :
   decreasing_by { simp_wf; sorry }
 
 
-def p1b : IO Unit :=
+def p1b (filename : String) : IO Unit :=
 do
-  let f ← IO.FS.readFile "P1/input.txt"
+  let f ← IO.FS.readFile filename
   let s := f.splitOn "\n" |>.dropLast
 
   let numberTrie := createNumberTrie
@@ -113,3 +117,7 @@ do
   ) 0
 
   IO.print s!"{total}\n"
+
+end P1
+
+end AOC

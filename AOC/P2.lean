@@ -1,10 +1,14 @@
 import Std.Data.RBMap.Basic
 
+namespace AOC
+
+namespace P2
+
 def Bla := Std.RBMap String Nat Ord.compare
 
-def p2a : IO Unit :=
+def p2a (filename : String) : IO Unit :=
 do
-  let f ← IO.FS.readFile "P2/input.txt"
+  let f ← IO.FS.readFile filename
   let s := f.splitOn "\n" |>.dropLast
 
   let mut total := 0
@@ -42,9 +46,9 @@ do
 
   IO.print s!"{total}\n"
 
-def p2b : IO Unit :=
+def p2b (filename : String) : IO Unit :=
 do
-  let f ← IO.FS.readFile "P2/input.txt"
+  let f ← IO.FS.readFile filename
   let s := f.splitOn "\n" |>.dropLast
 
   let mut total := 0
@@ -72,3 +76,6 @@ do
     --IO.println s!"id {id}: {minValues.toList} -> {power}"
 
   IO.print s!"total: {total}\n"
+
+end P2
+end AOC

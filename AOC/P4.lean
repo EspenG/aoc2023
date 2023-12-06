@@ -1,6 +1,9 @@
-def p4a : IO Unit :=
+namespace AOC
+namespace P4
+
+def p4a (filename : String) : IO Unit :=
 do
-  let f ← IO.FS.readFile "P4/input.txt"
+  let f ← IO.FS.readFile filename
   let s := f.splitOn "\n" |>.dropLast
 
   let mut total := 0
@@ -45,3 +48,6 @@ do
 
 
   IO.print s!"{total}\n"
+
+end P4
+end AOC
