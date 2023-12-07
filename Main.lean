@@ -9,10 +9,10 @@ do
   IO.println s!"Running the program... {method} with {inputFileName}";
 
   let methods := [
-    ("p1a", AOC.P1.p1a), ("p1b", AOC.P1.p1b),
-    ("p2a", AOC.P2.p2a), ("p2b", AOC.P2.p2b),
-    ("p3a", AOC.P3.p3a), ("p3b", AOC.P3.p3b),
-    ("p4a", AOC.P4.p4a)--, ("p4b", AOC.P4.p4b),
+    ("1a", AOC.P1.p1a), ("1b", AOC.P1.p1b),
+    ("2a", AOC.P2.p2a), ("2b", AOC.P2.p2b),
+    ("3a", AOC.P3.p3a), ("3b", AOC.P3.p3b),
+    ("4a", AOC.P4.a),   ("4b", AOC.P4.b)
   ]
   let methodToCall := methods.find? (fun (m : String × (String → IO Unit)) => m.1 == method)
   match methodToCall with
