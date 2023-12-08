@@ -12,7 +12,8 @@ do
     ("1a", AOC.P1.p1a), ("1b", AOC.P1.p1b),
     ("2a", AOC.P2.p2a), ("2b", AOC.P2.p2b),
     ("3a", AOC.P3.p3a), ("3b", AOC.P3.p3b),
-    ("4a", AOC.P4.a),   ("4b", AOC.P4.b)
+    ("4a", AOC.P4.a),   ("4b", AOC.P4.b),
+    ("5a", AOC.P5.a),   ("5b", AOC.P5.b)
   ]
   let methodToCall := methods.find? (fun (m : String × (String → IO Unit)) => m.1 == method)
   match methodToCall with
