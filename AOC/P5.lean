@@ -58,7 +58,19 @@ inductive MappingNode where
   | node (less : MappingNode) (more : MappingNode) (range : MapingRange)
 
 def MappingNode.mkRoot : MappingNode :=
-  MappingNode.node MappingNode.nil MappingNode.nil (MapingRange.mk 0 0 100)
+  MappingNode.node MappingNode.nil MappingNode.nil (MapingRange.mk 0 0 100000000000000)
+
+def MappingNode.rangeMapsTo (n : MappingNode) (i : Nat) (cnt : Nat) : Prod Nat Nat :=
+  match n with
+  | MappingNode.nil => Prod.mk 0 0
+  | MappingNode.node less more range =>
+    if range.contains i then
+      Prod.mk (range.destination + (i - range.source)) (min cnt (range.length - (i - range.source)))
+    else
+      if i < range.source then
+        less.rangeMapsTo i cnt
+      else
+        more.rangeMapsTo i cnt
 
 def MappingNode.mapsTo (n : MappingNode) (i : Nat) : Nat :=
   match n with
@@ -130,7 +142,7 @@ instance : ToString MappingNode where
   toString n :=
     match n with
     | MappingNode.nil => "nil"
-    | MappingNode.node less more range =>
+    | MappingNode.node _ _ range =>
       "node(?, ?, " ++ toString range ++ ")"
 
 def print_mapping_range (n: MappingNode) : IO Unit :=
@@ -164,7 +176,14 @@ def parse_maps (s: List String) : List (List String) :=
 def create_mapping_tree (s: List MapingRange) : MappingNode :=
   s.foldl (λ acc r => acc.insert r) MappingNode.mkRoot
 
-
+-- maps a list to a list of pairs
+def pairs {α : Type} (l : List α) : List (α × α) :=
+  let rec pairs' {α : Type} (l : List α) (acc : List (α × α)) : List (α × α) :=
+    match l with
+    | [] => acc
+    | [_] => acc
+    | (a::b::t) => pairs' t ((a, b)::acc)
+  pairs' l []
 
 def a (filename : String) : IO Unit :=
 do
@@ -176,23 +195,10 @@ do
   let s := s.drop 2
   let g := parse_maps s |> List.map parse_map |> List.map create_mapping_tree |>.reverse
 
-  -- print_mapping_range (g.get! 5)
-  -- print_mapping_tree (g.get! 5)
-  -- println! ""
-  --print_mapping_tree (g.get! 6)
-
-  -- let mut m := 79
-  -- for ss in g do
-  --   let mapped := ss.mapsTo m
-  --   IO.println s!"{m} => {mapped}"
-  --   m := mapped
-
-  --IO.println s!"79 => {mapped.}"
   let mut lowest := 100000000000000
   for seed in seeds do
     let mapped := g.foldl (λ acc n => n.mapsTo acc) seed
     lowest := min lowest mapped
-  --  IO.println s!"{seed} -> {mapped}"
   IO.println s!"lowest: {lowest}"
 
 def b (filename : String) : IO Unit :=
@@ -200,6 +206,22 @@ do
   let f ← IO.FS.readFile filename
   let s := f.splitOn "\n" |>.dropLast
 
+  let seeds := s.get! 0 |>.splitOn ":" |>.get! 1 |>.trim |>.splitOn " " |>.map String.toNat! |> pairs
+
+  let s := s.drop 2
+  let g := parse_maps s |> List.map parse_map |> List.map create_mapping_tree |>.reverse
+
+  let mut lowest := 100000000000000
+  for (seed, cnt) in seeds do
+    let mut cnt := cnt
+    let mut seed := seed
+    while cnt > 0 do
+      let (mapped, checked) := g.foldl (λ acc n => n.rangeMapsTo acc.fst acc.snd)
+        (Prod.mk seed cnt)
+      lowest := min lowest mapped
+      cnt := cnt - checked
+      seed := seed + checked
+  IO.println s!"lowest: {lowest}"
 
 end P5
 end AOC
