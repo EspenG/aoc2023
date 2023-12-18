@@ -1,0 +1,20 @@
+namespace AOC
+namespace P17
+
+
+
+def a (filename : String) : IO Unit :=
+do
+  let f ← IO.FS.readFile filename
+  let s := f.splitOn "\n" |>.dropLast
+
+
+
+def b (filename : String) : IO Unit :=
+do
+  let f ← IO.FS.readFile filename
+  let s := f.splitOn "\n" |>.dropLast
+
+
+end P17
+end AOC
