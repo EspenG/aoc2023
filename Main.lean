@@ -26,8 +26,8 @@ do
     ("15a", AOC.P15.a),   ("15b", AOC.P15.b),
     ("16a", AOC.P16.a),   ("16b", AOC.P16.b),
     ("17a", AOC.P17.a),   ("17b", AOC.P17.b),
-    ("18a", AOC.P18.a),   ("18b", AOC.P18.b)
-    -- ("19a", AOC.P19.a),   ("19b", AOC.P19.b),
+    ("18a", AOC.P18.a),   ("18b", AOC.P18.b),
+    ("19a", AOC.P19.a),   ("19b", AOC.P19.b)
     -- ("20a", AOC.P20.a),   ("20b", AOC.P20.b),
     -- ("21a", AOC.P21.a),   ("21b", AOC.P21.b),
     -- ("22a", AOC.P22.a),   ("22b", AOC.P22.b),
