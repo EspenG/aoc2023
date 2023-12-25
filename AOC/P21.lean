@@ -1,5 +1,5 @@
 namespace AOC
-namespace P20
+namespace P21
 
 def a (filename : String) : IO Unit :=
 do
@@ -14,5 +14,5 @@ do
   let s := f.splitOn "\n" |>.dropLast
 
 
-end P20
+end P21
 end AOC

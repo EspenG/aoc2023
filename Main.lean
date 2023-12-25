@@ -27,13 +27,13 @@ do
     ("16a", AOC.P16.a),   ("16b", AOC.P16.b),
     ("17a", AOC.P17.a),   ("17b", AOC.P17.b),
     ("18a", AOC.P18.a),   ("18b", AOC.P18.b),
-    ("19a", AOC.P19.a),   ("19b", AOC.P19.b)
-    -- ("20a", AOC.P20.a),   ("20b", AOC.P20.b),
-    -- ("21a", AOC.P21.a),   ("21b", AOC.P21.b),
-    -- ("22a", AOC.P22.a),   ("22b", AOC.P22.b),
-    -- ("23a", AOC.P23.a),   ("23b", AOC.P23.b),
-    -- ("24a", AOC.P24.a),   ("24b", AOC.P24.b),
-    -- ("25a", AOC.P25.a),   ("25b", AOC.P25.b)
+    ("19a", AOC.P19.a),   ("19b", AOC.P19.b),
+    ("20a", AOC.P20.a),   ("20b", AOC.P20.b),
+    ("21a", AOC.P21.a),   ("21b", AOC.P21.b),
+    ("22a", AOC.P22.a),   ("22b", AOC.P22.b),
+    ("23a", AOC.P23.a),   ("23b", AOC.P23.b),
+    ("24a", AOC.P24.a),   ("24b", AOC.P24.b),
+    ("25a", AOC.P25.a),   ("25b", AOC.P25.b)
   ]
   let methodToCall := methods.find? (fun (m : String × (String → IO Unit)) => m.1 == method)
   match methodToCall with

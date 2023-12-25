@@ -18,3 +18,9 @@ import AOC.P16
 import AOC.P17
 import AOC.P18
 import AOC.P19
+import AOC.P20
+import AOC.P21
+import AOC.P22
+import AOC.P23
+import AOC.P24
+import AOC.P25
